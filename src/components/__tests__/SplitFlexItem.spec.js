@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SplitFlexView from '../SplitFlexView';
+import SplitFlexItem from '../SplitFlexItem';
 
-describe('SplitFlexView component', () => {
+describe('SplitFlexItem component', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<SplitFlexView />, div);
+    ReactDOM.render(<SplitFlexItem />, div);
   });
 })

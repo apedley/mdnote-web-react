@@ -1,16 +1,15 @@
 import React from 'react';
 // import Markdown from 'react-markdown';
-import SplitFlexView from '../../../components/SplitFlexView';
+import SplitFlexItem from '../../../components/SplitFlexItem';
 import MarkdownViewer from '../../../components/MarkdownViewer';
 
 function NoteItem({ note }) {
   return (
-    <SplitFlexView>
-      <h2>{ note.title }</h2>
-      <MarkdownViewer source={ note.body } />
-    </SplitFlexView>
+    <SplitFlexItem>
+      <h2>{ note.title || '(Untitled)' }</h2>
+      <MarkdownViewer source={ note.body || '(Body empty)' } />
+    </SplitFlexItem>
   )
 }
-
 
 export default NoteItem;

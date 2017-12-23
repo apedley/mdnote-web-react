@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { loadNotesAndCategories, selectNote, deselectNote } from './actions';
-import { selectCategoriesWithNotes, selectErrors } from './selectors';
-import CategoryList from './components/CategoryList';
-import NoteItem from './components/NoteItem';
-import styled from 'styled-components'
+
+import { loadNotesAndCategories, selectNote, updateEditNote, saveEditNote } from './actions';
+import { selectCategoriesWithNotes, selectErrors, selectSelectedNote, selectEditNote } from './selectors';
+
 import { toggleCategory } from '../App/actions';
 import { selectCollapsedCategories } from '../App/selectors';
+
+import SplitFlexView from '../../components/SplitFlexView';
+import SplitFlexItem from '../../components/SplitFlexItem';
+
+import CategoryList from './components/CategoryList';
+import NoteItem from './components/NoteItem';
+import EditNote from './components/EditNote';
+
 
 
 class Notes extends Component {
   constructor(props) {
     super(props);
     this.props.actions.loadNotesAndCategories();
-
-    // this.categoryClicked = this.categoryClicked.bind(this);
   }
 
   renderCategories() {
@@ -35,7 +40,11 @@ class Notes extends Component {
   
   renderSelectedNote() {
     if (this.props.selectedNote === null) {
-      return;
+      return (
+        <SplitFlexItem>
+          Select a note from the list
+        </SplitFlexItem>
+      )
     }
 
     return (
@@ -44,37 +53,56 @@ class Notes extends Component {
   }
 
 
-  render() {
-    const Wrapper = styled.div`
-      height: 95vh;
-      display: flex;
-      flex-wrap: wrap;
-    `
-    
+  renderLibraryView() {
+
     return (
-      <Wrapper>
+      <SplitFlexView reverseWhenSmall>
         {this.renderCategories()}
         {this.renderSelectedNote()}
-      </Wrapper>
+      </SplitFlexView>
     );
+  }
+
+  renderNewView() {
+
+    return (
+      <SplitFlexView>
+        <EditNote onSubmit={this.props.actions.saveEditNote} onChange={this.props.actions.updateEditNote} />
+        <NoteItem note={this.props.editNote} />
+      </SplitFlexView>
+    )
+  }
+  render() {
+    if (this.props.path === '/notes') {
+      return this.renderLibraryView();
+    }
+
+    if (this.props.path === '/notes/new') {
+      return this.renderNewView();
+    }
+
+    return (
+      <div>lol</div>
+    )
   }
 }
 
 const mapStateToProps = state => ({
   categoriesEntities: selectCategoriesWithNotes(state),
   errors: selectErrors(state),
-  selectedNote: state.notes.selectedNote,
-  collapsedCategories: selectCollapsedCategories(state)
+  selectedNote: selectSelectedNote(state),
+  collapsedCategories: selectCollapsedCategories(state),
+  editNote: selectEditNote(state)
 });
-
 
 function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators({
       loadNotesAndCategories,
       selectNote,
-      deselectNote,
-      toggleCategory
+      toggleCategory,
+      updateEditNote,
+      saveEditNote
     }, dispatch),
   }
 }

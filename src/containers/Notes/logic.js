@@ -1,6 +1,7 @@
 import { createLogic } from 'redux-logic'
 import {
   LOAD_NOTES_AND_CATEGORIES,
+  SAVE_EDIT_NOTE,
   loadNotesAndCategoriesSuccess,
   loadNotesAndCategoriesFailure
 } from './actions';
@@ -35,7 +36,17 @@ const loadNotesAndCategoriesLogic = createLogic({
   }
 });
 
+const saveEditNote = createLogic({
+  type: SAVE_EDIT_NOTE,
+  async process({ api, action}, dispatch, done) {
+    const note = action.payload;
+    console.dir(note);
+    debugger;
+    done();
+  }
+})
 
 export default [
   loadNotesAndCategoriesLogic,
+  saveEditNote
 ]

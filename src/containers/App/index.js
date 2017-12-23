@@ -28,6 +28,7 @@ class App extends Component {
     return (
       <div>
         <Switch>
+          <ProtectedRoute path="/notes/new" exact component={NotesPage} {...this.props} />
           <ProtectedRoute path="/notes" exact component={NotesPage} {...this.props} />
           <Route path="/signin" exact component={AuthPage} />
           <Route path="/signup" exact component={AuthPage} />

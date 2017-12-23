@@ -20,15 +20,13 @@ function appReducer (state = initialState, action) {
       }
     }
     case TOGGLE_CATEGORY: {
-      const categoryId = action.payload;
-      const categoryOpen = state.collapsedCategories[categoryId] === true ? false : true;
-
-      const newCollapsedCategories = { ...state.collapsedCategories };
-      newCollapsedCategories[categoryId] = categoryOpen;
-
       return {
         ...state,
-        collapsedCategories: newCollapsedCategories
+        collapsedCategories: {
+          ...state.collapsedCategories,
+          // set key = objectId to false if true, true if false or undefined
+          [action.payload]: state.collapsedCategories[action.payload] === true ? false : true
+        }
       }
     }
     default:

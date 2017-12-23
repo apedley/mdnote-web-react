@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon, List, Header } from 'semantic-ui-react';
 import styled from 'styled-components';
 import NoteList from './NoteList';
-import SplitFlexView from '../../../components/SplitFlexView';
+import SplitFlexItem from '../../../components/SplitFlexItem';
 import { colors } from '../../../theme';
 
 function CategoryList({ categoryEntities, categoryClick, noteClick }) {
@@ -51,11 +51,11 @@ function CategoryList({ categoryEntities, categoryClick, noteClick }) {
   });
 
   return (
-    <SplitFlexView>
+    <SplitFlexItem>
       <List>
       { categoryItems }
       </List>
-    </SplitFlexView>
+    </SplitFlexItem>
   )
 }
 

@@ -14,7 +14,7 @@ function Toolbar({ signoutClicked, sidebarButtonCLicked }) {
     <Wrapper>
       <Menu>
         <Menu.Item as={NavLink} name="View All" to="/notes" activeClassName="active" exact />
-        <Menu.Item as={NavLink} name="Categories" to="/categories" activeClassName="active" exact />
+        {/* <Menu.Item as={NavLink} name="Categories" to="/categories" activeClassName="active" exact /> */}
         <Menu.Item as={NavLink} name="New Note" to="/notes/new" activeClassName="active" />
         <Menu.Item onClick={ sidebarButtonCLicked }>
           <Icon name="bars"></Icon>

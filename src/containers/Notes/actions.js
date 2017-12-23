@@ -7,6 +7,9 @@ export const LOAD_NOTES_AND_CATEGORIES_FAILURE = 'Notes/LOAD_NOTES_AND_CATEGORIE
 export const SELECT_NOTE = 'Notes/SELECT_NOTE';
 export const DESELECT_NOTE = 'Notes/DESELECT_NOTE';
 
+export const UPDATE_EDIT_NOTE = 'Notes/UPDATE_EDIT_NOTE';
+export const SAVE_EDIT_NOTE = 'Notes/SAVE_EDIT_NOTE';
+
 export function loadNotesAndCategories () {
   return {
     type: LOAD_NOTES_AND_CATEGORIES,
@@ -22,7 +25,6 @@ export function loadNotesAndCategoriesSuccess(notes, categories) {
     }
   }
 }
-
 
 export function loadNotesAndCategoriesFailure(errors) {
   return {
@@ -41,5 +43,20 @@ export function selectNote(note) {
 export function deselectNote() {
   return {
     type: DESELECT_NOTE
+  }
+}
+
+export function updateEditNote(note) {
+  return {
+    type: UPDATE_EDIT_NOTE,
+    payload: note
+  }
+}
+
+
+export function saveEditNote(note) {
+  return {
+    type: SAVE_EDIT_NOTE,
+    payload: note
   }
 }

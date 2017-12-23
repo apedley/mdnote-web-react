@@ -25,6 +25,7 @@ const selectCategoriesWithNotes = createSelector(
       collapsed: collapsed[0] === true
     }
 
+    // Put uncategorized at top of list
     let result = { ids: [0], categories: {} };
 
     categories.forEach(category => {
@@ -49,10 +50,22 @@ const selectCategoriesWithNotes = createSelector(
   }
 );
 
+const selectSelectedNote = createSelector(
+  selectNotesDomain,
+  notesState => notesState.selectedNote
+);
+
+const selectEditNote = createSelector(
+  selectNotesDomain,
+  notesState => notesState.editNote
+);
+
 export {
   selectNotesDomain,
   selectCategoriesSubdomain,
   selectNotesSubdomain,
   selectCategoriesWithNotes,
-  selectErrors
+  selectErrors,
+  selectSelectedNote,
+  selectEditNote
 }

@@ -2,14 +2,16 @@ import {
   LOAD_NOTES_AND_CATEGORIES_SUCCESS,
   LOAD_NOTES_AND_CATEGORIES_FAILURE,
   SELECT_NOTE,
-  DESELECT_NOTE 
+  DESELECT_NOTE,
+  UPDATE_EDIT_NOTE,
 } from './actions';
 
 const initialState = {
   categories: [],
   notes: [],
   selectedNote: null,
-  errors: []
+  errors: [],
+  editNote: { title: '', body: '' }
 }
 
 function notesReducer (state = initialState, action) {
@@ -34,6 +36,11 @@ function notesReducer (state = initialState, action) {
       return {
         ...state,
         selectedNote: null
+      }
+    case UPDATE_EDIT_NOTE:
+      return {
+        ...state,
+        editNote: action.payload
       }
     default:
       return state;

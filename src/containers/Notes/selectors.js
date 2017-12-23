@@ -1,13 +1,19 @@
 import { createSelector } from 'reselect'
+import { selectCollapsedCategories } from '../App/selectors';
 
+const selectNotesDomain = state => state.notes;
 
-const selectCategoriesDomain = state => state.notes.categories;
-const selectNotesDomain = state => state.notes.notes;
+const selectCategoriesSubdomain = state => state.notes.categories;
+const selectNotesSubdomain = state => state.notes.notes;
+
+const selectErrors = createSelector(
+  selectNotesDomain,
+  notesState => notesState.errors
+);
 
 const selectCategoriesWithNotes = createSelector(
-  selectCategoriesDomain,
-  selectNotesDomain,
-  (categories, notes) => {
+  [selectCategoriesSubdomain, selectNotesSubdomain, selectCollapsedCategories],
+  (categories, notes, collapsed) => {
     if (categories.length === 0) {
       return { ids: [], categories: {} };
     }
@@ -15,7 +21,8 @@ const selectCategoriesWithNotes = createSelector(
     const uncategorized = {
       name: 'Uncategorized',
       id: 0,
-      notes: []
+      notes: [],
+      collapsed: collapsed[0] === true
     }
 
     let result = { ids: [0], categories: {} };
@@ -24,6 +31,7 @@ const selectCategoriesWithNotes = createSelector(
       const id = category.id;
       result.ids.push(id);
       category.notes = [];
+      category.collapsed = collapsed[id] === true;
       result.categories[id] = category;
     });
 
@@ -42,7 +50,9 @@ const selectCategoriesWithNotes = createSelector(
 );
 
 export {
-  selectCategoriesDomain,
   selectNotesDomain,
-  selectCategoriesWithNotes
+  selectCategoriesSubdomain,
+  selectNotesSubdomain,
+  selectCategoriesWithNotes,
+  selectErrors
 }

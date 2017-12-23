@@ -15,3 +15,7 @@ body {
   min-height: 100%;
   min-width: 100%;
 }
+
+pre.app-syntax-highlight {
+  white-space: pre-wrap;
+}

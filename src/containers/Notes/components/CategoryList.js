@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Icon, Button, List, Header } from 'semantic-ui-react';
+import { Icon, Button, List, Header, Segment, Divider } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import NoteList from './NoteList';
 import SplitFlexView from '../../../components/SplitFlexView';
+import { colors } from '../../../theme';
 
 function CategoryList({ categoryEntities, categoryClick, noteClick }) {
 
@@ -13,14 +14,42 @@ function CategoryList({ categoryEntities, categoryClick, noteClick }) {
   const categoryItems = ids.map( categoryId => {
     const category = categories[categoryId];
 
-    return (
-      <List.Item key={categoryId}>
-        <List.Header onClick={() => { categoryClick(category) }}>
-          {category.name} - {category.notes.length}
-        </List.Header>
+    const CategoryWrapper = styled.div`
+      margin-bottom: 2rem;
+    `
+
+    const categoryHeaderStyle = {
+      color: colors.primary,
+      // borderBottom: '1px solid darkorange',
+      borderBottom: `1px solid ${colors.primary}`,
+      paddingBottom: '8px',
+      cursor: 'pointer',
+      marginBottom: '.5rem'
+    }
+
+    let notesView;
+
+    if (category.collapsed) {
+      notesView = ''
+    } else {
+      notesView = (
         <NoteList notes={category.notes} noteClick={noteClick}></NoteList>
-      </List.Item>
-    )
+      )
+    }
+
+    return (
+      <CategoryWrapper key={category.id}>
+        <Header size='large' style={categoryHeaderStyle} onClick={() => { categoryClick(category.id); }}>
+          <Header.Content>
+            <Icon name={ category.collapsed ? 'caret right' : 'caret down'} /> { category.name } - ({category.notes.length})
+            {/* <Header.Subheader>
+              { category.description }
+            </Header.Subheader> */}
+          </Header.Content>
+        </Header>
+        { notesView }
+      </CategoryWrapper>
+    );
   });
 
   return (
@@ -31,14 +60,5 @@ function CategoryList({ categoryEntities, categoryClick, noteClick }) {
     </SplitFlexView>
   )
 }
-
-
-// CategoryList.propTypes = {
-//   categoryEntities: PropTypes.object
-// };
-
-// CategoryList.defaultProps = {
-//   categoryEntities: { categories: [], ids: [] }
-// };
 
 export default CategoryList;

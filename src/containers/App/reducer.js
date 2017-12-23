@@ -1,33 +1,36 @@
 import {
-  TOGGLE_SIDEBAR,
-  OPEN_SIDEBAR,
-  CLOSE_SIDEBAR
+  SHOW_ERROR,
+  TOGGLE_CATEGORY
 } from './actions';
 
 const initialState = {
-  // sidebarOpen: true
+  errors: [],
+  collapsedCategories: {
+    7: true,
+    0: true
+  }
 }
 
 function appReducer (state = initialState, action) {
   switch (action.type) {
-    // case TOGGLE_SIDEBAR: {
-    //   return {
-    //     ...state,
-    //     sidebarOpen: !state.sidebarOpen
-    //   }
-    // }
-    // case OPEN_SIDEBAR: {
-    //   return {
-    //     ...state,
-    //     sidebarOpen: true
-    //   }
-    // }
-    // case CLOSE_SIDEBAR: {
-    //   return {
-    //     ...state,
-    //     sidebarOpen: false
-    //   }
-    // }
+    case SHOW_ERROR: {
+      return {
+        ...state,
+        errors: [...state.errors, action.payload]
+      }
+    }
+    case TOGGLE_CATEGORY: {
+      const categoryId = action.payload;
+      const categoryOpen = state.collapsedCategories[categoryId] === true ? false : true;
+
+      const newCollapsedCategories = { ...state.collapsedCategories };
+      newCollapsedCategories[categoryId] = categoryOpen;
+
+      return {
+        ...state,
+        collapsedCategories: newCollapsedCategories
+      }
+    }
     default:
       return state;
   }

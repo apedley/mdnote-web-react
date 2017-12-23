@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Message, Grid, Segment } from 'semantic-ui-react'
 import styled from 'styled-components'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 
 import { signin, signup } from './actions';
 
@@ -17,7 +17,6 @@ class Auth extends Component {
 
   constructor(props) {
     super(props);
-    debugger;
 
     const { pathname, state } = props.location
 
@@ -100,6 +99,12 @@ class Auth extends Component {
   }
 
   render() {
+    if (this.props.signedIn) {
+      return (
+        <Redirect to="/notes" />
+      )
+    }
+
     return (
       <Wrapper>
         {this.renderAuth()}
@@ -123,7 +128,7 @@ Auth.defaultProps = {
 
 
 const mapStateToProps = state => ({
-  user: state.user,
+  signedIn: state.auth.signedIn,
   errors: state.auth.errors,
 });
 

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import './index.css';
 import 'semantic-ui-css/semantic.min.css';
+import 'highlight.js/styles/atom-one-dark.css';
 
 import createHistory from 'history/createBrowserHistory'
 import configureStore from './store'

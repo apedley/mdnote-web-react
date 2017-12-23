@@ -3,22 +3,20 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { loadNotesAndCategories, selectNote, deselectNote } from './actions';
-import { selectCategoriesWithNotes } from './selectors';
+import { selectCategoriesWithNotes, selectErrors } from './selectors';
 import CategoryList from './components/CategoryList';
 import NoteItem from './components/NoteItem';
 import styled from 'styled-components'
+import { toggleCategory } from '../App/actions';
+import { selectCollapsedCategories } from '../App/selectors';
+
 
 class Notes extends Component {
   constructor(props) {
     super(props);
     this.props.actions.loadNotesAndCategories();
 
-    this.categoryClicked = this.categoryClicked.bind(this);
-  }
-
-  categoryClicked(category) {
-    console.log('category clicked: ');
-    console.dir(category);
+    // this.categoryClicked = this.categoryClicked.bind(this);
   }
 
   renderCategories() {
@@ -29,7 +27,7 @@ class Notes extends Component {
     return (
       <CategoryList 
         categoryEntities={this.props.categoriesEntities} 
-        categoryClick={this.categoryClicked} 
+        categoryClick={this.props.actions.toggleCategory} 
         noteClick={this.props.actions.selectNote}
       />
       
@@ -45,12 +43,15 @@ class Notes extends Component {
       <NoteItem note={this.props.selectedNote} />
     )
   }
+
+
   render() {
     const Wrapper = styled.div`
       height: 95vh;
       display: flex;
       flex-wrap: wrap;
     `
+    
     return (
       <Wrapper>
         {this.renderCategories()}
@@ -62,7 +63,9 @@ class Notes extends Component {
 
 const mapStateToProps = state => ({
   categoriesEntities: selectCategoriesWithNotes(state),
-  selectedNote: state.notes.selectedNote
+  errors: selectErrors(state),
+  selectedNote: state.notes.selectedNote,
+  collapsedCategories: selectCollapsedCategories(state)
 });
 
 
@@ -71,7 +74,8 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators({
       loadNotesAndCategories,
       selectNote,
-      deselectNote
+      deselectNote,
+      toggleCategory
     }, dispatch),
   }
 }

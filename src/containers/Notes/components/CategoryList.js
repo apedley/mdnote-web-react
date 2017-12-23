@@ -31,7 +31,7 @@ function CategoryList({ categoryEntities, categoryClick, noteClick }) {
       notesView = ''
     } else {
       notesView = (
-        <NoteList notes={category.notes} noteClick={noteClick}></NoteList>
+        <NoteList notes={category.notes} noteClick={noteClick} />
       )
     }
 

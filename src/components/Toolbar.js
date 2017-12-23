@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Menu, Icon, Button, Dropdown } from 'semantic-ui-react';
+import { Input, Menu, Icon, Dropdown } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 

@@ -5,8 +5,6 @@ import { bindActionCreators } from 'redux';
 import styled from 'styled-components'
 
 import { loadData, signout } from '../Auth/actions';
-import { toggleSidebar } from './actions';
-
 import ProtectedRoute from '../../components/ProtectedRoute';
 
 import NotesPage from '../Notes';

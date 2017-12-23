@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Button, Form, Header, Icon, Label } from 'semantic-ui-react'
+import { Button, Form, Header } from 'semantic-ui-react'
 
 export default class Signup extends PureComponent {
   constructor (props) {

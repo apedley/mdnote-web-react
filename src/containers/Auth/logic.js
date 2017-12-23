@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 import { save, load, remove } from '../../utils/storage';
 
 import { userSchema } from './schema'
-import { SIGNIN, SIGNOUT, SIGNUP, SIGNIN_SUCCESS, LOAD_DATA, AUTHORIZATION_FAILED, signinSuccess, signinFailed, signupFailed, signupSuccess, signoutSuccess, loadDataSuccess } from './actions';
+import { SIGNIN, SIGNOUT, SIGNUP, SIGNIN_SUCCESS, LOAD_DATA, signinSuccess, signinFailed, signupSuccess, loadDataSuccess } from './actions';
 
 
 const signinLogic = createLogic({

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Message, Grid, Segment } from 'semantic-ui-react'
+import { Message } from 'semantic-ui-react'
 import styled from 'styled-components'
 import { NavLink, Redirect } from 'react-router-dom'
 

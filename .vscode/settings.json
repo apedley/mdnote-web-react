@@ -1,7 +1,7 @@
 {
   "files.exclude": {
     "**/.git": true,
-    "build/": false,
+    "build/": true,
     "**/.DS_Store": true
   }
 }

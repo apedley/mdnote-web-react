@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-import { Icon, Button, List, Header, Segment, Divider } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom';
+import { Icon, List, Header } from 'semantic-ui-react';
 import styled from 'styled-components';
 import NoteList from './NoteList';
 import SplitFlexView from '../../../components/SplitFlexView';

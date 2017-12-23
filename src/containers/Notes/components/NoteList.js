@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Icon, Popup, Table, Header } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom';
+import { Popup, Table } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

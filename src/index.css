@@ -1,0 +1,17 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  -webkit-app-region: drag;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Lato, Helvetica, Arial, sans-serif;
+}
+
+#root {
+  min-height: 100%;
+  min-width: 100%;
+}
